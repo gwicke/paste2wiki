@@ -19,6 +19,18 @@ function removeWrapperNode(node) {
     node.parentNode.removeChild(node);
 }
 
+function nextElementSibling(node) {
+    var sibling = node.nextSibling;
+    while (sibling && sibling.nodeType !== document.ELEMENT_NODE) {
+        if (sibling.nodeType === document.TEXT_NODE && !/^[\s\n]*$/.test(sibling.textContent)) {
+            // Don't skip over non-ws text.
+            return null;
+        }
+        sibling = sibling.nextSibling
+    }
+    return sibling === node ? null : sibling;
+}
+
 function massageNode(node) {
     switch(node.nodeName) {
         case 'STRONG':
@@ -28,8 +40,21 @@ function massageNode(node) {
             node = renameNode(node, 'p');
             break;
         case 'SPAN':
+            // Check if followed by ws & two <br>, and convert to <p> if that's
+            // the case. This is common with GMail.
+            var nextElement = nextElementSibling(node);
+            console.log(nextElement);
+            nextElement = nextElement && nextElementSibling(node);
+            if (nextElement && nextElement.nodeName === 'BR') {
+                node = renameNode(node, 'p');
+            } else {
+                removeWrapperNode(node);
+                return -1;
+            }
+            break;
         case 'BR':
         case 'ASIDE':
+        case 'WBR':
         case 'SECTION':
         case 'HEADER':
         case 'TIME':
