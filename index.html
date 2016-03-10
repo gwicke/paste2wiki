@@ -63,6 +63,7 @@
         var htmlContentNode = document.getElementById('editable');
         massageHTML(htmlContentNode);
         data.append('html', htmlContentNode.innerHTML);
+        data.append('scrub_wikitext', 'true');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://en.wikipedia.org/api/rest_v1/transform/html/to/wikitext', true);
         xhr.onload = function () {
