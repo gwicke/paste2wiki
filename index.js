@@ -53,6 +53,8 @@ function massageNode(node) {
             }
             break;
         case 'BR':
+            // TODO: Preserve some more double-br sequences in GMail HTML.
+            // Wrap preceding text node(s) in <p>?
         case 'ASIDE':
         case 'WBR':
         case 'SECTION':
