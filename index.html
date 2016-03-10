@@ -75,8 +75,17 @@
 <body>
 	Paste HTML here:
     <div id="editable" style="border: 2px solid red; min-height: 200px;" contenteditable="true"></div>
-	<button onclick="return convert()">Convert to HTML</button>
+	<button onclick="return convert()">Clean up HTML and convert to Wikitext</button>
 <p>Wikitext:</p>
     <textarea style="width:100%; min-height: 300px" id="output"></textarea>
+
+    <h3>See also</h3>
+    <ul>
+        <li><a
+                href="https://en.wikipedia.org/api/rest_v1/?doc#!/Transforms/post_transform_html_to_wikitext_title_revision">API
+        end point used for HTML to Wikitext conversion</a></li>
+        <li><a href="https://github.com/gwicke/paste2wiki">Check out the
+                code</a></li>
+    </ul>
 </body>
 </html>
