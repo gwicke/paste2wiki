@@ -84,7 +84,7 @@ function massageNode(node) {
     } else if (node.nodeType === document.TEXT_NODE) {
         if (node.parentNode.nodeName !== 'PRE') {
             // Remove indents outside of preformatted text
-            node.textContent = node.textContent.replace(/(\n|^)[ \t]+/g, '$1');
+            node.textContent = node.textContent.replace(/(\n|^)[ \t]+(?=[^ \t\n])/g, '$1');
         }
     }
     return 0;
