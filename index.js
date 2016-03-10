@@ -19,6 +19,12 @@ function removeWrapperNode(node) {
     node.parentNode.removeChild(node);
 }
 
+function removeAttributes(node) {
+    while (node.attributes.length) {
+        node.removeAttribute(node.attributes[0].name);
+    }
+}
+
 function nextElementSibling(node) {
     var sibling = node.nextSibling;
     while (sibling && sibling.nodeType !== document.ELEMENT_NODE) {
@@ -35,9 +41,11 @@ function massageNode(node) {
     switch(node.nodeName) {
         case 'STRONG':
             node = renameNode(node, 'b');
+            removeAttributes(node);
             break;
         case 'DIV':
             node = renameNode(node, 'p');
+            removeAttributes(node);
             break;
         case 'SPAN':
             // Check if followed by ws & two <br>, and convert to <p> if that's
@@ -47,6 +55,7 @@ function massageNode(node) {
             nextElement = nextElement && nextElementSibling(node);
             if (nextElement && nextElement.nodeName === 'BR') {
                 node = renameNode(node, 'p');
+                removeAttributes(node);
             } else {
                 removeWrapperNode(node);
                 return -1;
@@ -69,6 +78,9 @@ function massageNode(node) {
             // Remove completely
             node.parentNode.removeChild(node);
             return -1;
+        case 'CODE':
+            removeAttributes(node);
+            break;
         case 'A':
             // Strip links without href
             if (node.getAttribute('href') === null) {
@@ -84,7 +96,7 @@ function massageNode(node) {
     } else if (node.nodeType === document.TEXT_NODE) {
         if (node.parentNode.nodeName !== 'PRE') {
             // Remove indents outside of preformatted text
-            node.textContent = node.textContent.replace(/(\n|^)[ \t]+(?=[^ \t\n])/g, '$1');
+            node.textContent = node.textContent.replace(/\n[ \t]+(?=[^ \t\n])/g, '$1');
         }
     }
     return 0;
