@@ -1,3 +1,4 @@
+
 function reparentChildren(oldNode, newNode) {
     while (oldNode.childNodes.length > 0) {
         newNode.appendChild(oldNode.childNodes[0]);
@@ -93,6 +94,8 @@ function massageNode(node) {
     if (node.nodeType === document.ELEMENT_NODE) {
         // Remove inline styles.
         node.removeAttribute('style');
+        // Also remove CSS classes.
+        node.removeAttribute('class');
 
         // Recurse.
         for (var i = 0; i < node.childNodes.length; i++) {
@@ -113,6 +116,12 @@ function massageHTML(node) {
     }
 }
 
+// Helper to clear the text input
+function clearEditable() {
+    document.getElementById('editable').innerHTML = '';
+}
+
+// Main conversion entry point
 function convert() {
     var data = new FormData();
     var htmlContentNode = document.getElementById('editable');
@@ -127,3 +136,4 @@ function convert() {
     };
     xhr.send(data);
 }
+

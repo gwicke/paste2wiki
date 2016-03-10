@@ -8,18 +8,20 @@
 </head>
 <body>
     <h3>paste2wiki: Clean up pasted HTML and convert it to wikitext</h3>
-	Paste HTML here:
-    <div id="editable" style="border: 1px solid grey; min-height: 200px;" contenteditable="true"></div>
-	<button onclick="return convert()">Clean up HTML and convert to Wikitext</button>
-<p>Wikitext:</p>
-<textarea style="border: 1px solid grey; width:100%; min-height: 200px"
-    id="output"></textarea>
+    Paste HTML here:
+    <div id="editable" style="border: 1px solid grey; min-height: 200px;"
+        contenteditable="true"></div>
+    <button onclick="return convert()">Clean up HTML and convert to Wikitext</button>
+    <button onclick="clearEditable()">Clear HTML area</button>
+    <p>Wikitext:</p>
+    <textarea style="border: 1px solid grey; width:100%; min-height: 200px"
+        id="output"></textarea>
 
     <h3>See also</h3>
     <ul>
         <li><a
                 href="https://en.wikipedia.org/api/rest_v1/?doc#!/Transforms/post_transform_html_to_wikitext_title_revision">API
-        end point used for HTML to Wikitext conversion</a></li>
+                end point used for HTML to Wikitext conversion</a></li>
         <li><a href="https://github.com/gwicke/paste2wiki">Check out the
                 code</a></li>
     </ul>
