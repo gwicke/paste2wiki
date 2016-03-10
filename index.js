@@ -90,6 +90,10 @@ function massageNode(node) {
     }
 
     if (node.nodeType === document.ELEMENT_NODE) {
+        // Remove inline styles.
+        node.removeAttribute('style');
+
+        // Recurse.
         for (var i = 0; i < node.childNodes.length; i++) {
             i += massageNode(node.childNodes[i]);
         }
