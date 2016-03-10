@@ -79,6 +79,7 @@ function massageNode(node) {
             node.parentNode.removeChild(node);
             return -1;
         case 'CODE':
+        case 'P':
             removeAttributes(node);
             break;
         case 'A':
